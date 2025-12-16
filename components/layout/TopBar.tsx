@@ -8,7 +8,7 @@ const TopBar = () => {
       {/* Background Shape: The Yellow Diagonal Polygon */}
       {/* Responsive Width: 85% on mobile, 70% on medium screens and up */}
       <div 
-        className="absolute top-0 left-0 h-full w-[85%] md:w-[70%] bg-yellow-500 z-0 transition-all duration-300 ease-in-out"
+        className="absolute top-0 left-0 h-full w-[55%] md:w-[50%] bg-yellow-500 z-0 transition-all duration-300 ease-in-out"
         style={{ clipPath: 'polygon(0 0, 100% 0, 92% 100%, 0% 100%)' }} 
       />
 

@@ -4,17 +4,15 @@ import React from 'react';
 import { FaPaperPlane } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
-// --- ASSET IMPORTS ---
-// Importing the background image explicitly allows Next.js to handle the file path reliably.
-// Ensure your file is located at: /app/assets/bg.png
-import bgImage from '@/app/assets/bg.png';
+// --- REMOVED IMPORT ---
+// We do not need to import the image when using the public folder.
+// Just ensure the file is at: /public/assets/bg.png
 
 const OgHero = () => {
   
   // --- ANIMATION SETTINGS (Framer Motion) ---
   
-  // 1. Container Animation: Controls the sequence of entrance animations.
-  // 'staggerChildren' makes the inner elements appear one after another rather than all at once.
+  // 1. Container Animation
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -23,13 +21,13 @@ const OgHero = () => {
     }
   };
 
-  // 2. Item Animation: The default animation for text/buttons sliding up.
+  // 2. Item Animation
   const itemVariants = {
     hidden: { y: 30, opacity: 0 },
     visible: { 
       y: 0, 
       opacity: 1, 
-      transition: { duration: 0.6, ease: "easeOut" } 
+      transition: { duration: 0.6, ease: [0.4, 0.0, 0.2, 1] } 
     }
   };
 
@@ -39,17 +37,15 @@ const OgHero = () => {
       {/* =========================================
           BACKGROUND LAYER
          ========================================= */}
-      {/* This div is absolutely positioned to act as a background. 
-          It uses the exact dimensions and opacity requested. 
-          pointer-events-none ensures it doesn't block clicks on the text. */}
       <div 
         className="absolute left-1/2 transform -translate-x-1/2 pointer-events-none z-0"
         style={{
           width: '1600px',
           height: '766px',
           top: '75.5px',
-          opacity: 0.04, // Very subtle visibility
-          backgroundImage: `url(${bgImage.src})`, 
+          opacity: 0.04, 
+          // FIX: Use the direct string path to the public folder
+          backgroundImage: "url('/assets/bg.png')", 
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
@@ -61,7 +57,7 @@ const OgHero = () => {
          ========================================= */}
       <motion.div 
         className="relative z-10 w-full md:w-1/2 space-y-6 text-center md:text-left"
-        variants={containerVariants} // Connects to the staggered animation wrapper
+        variants={containerVariants} 
         initial="hidden"
         animate="visible"
       >
@@ -105,21 +101,18 @@ const OgHero = () => {
          ========================================= */}
       <motion.div 
         className="relative z-10 w-full md:w-1/2 mt-8 md:mt-0 flex justify-center md:justify-end"
-        initial={{ opacity: 0, x: 50 }} // Slide in from right
+        initial={{ opacity: 0, x: 50 }} 
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
       >
         
-        {/* --- GRID LAYOUT --- 
-            We use a flex row for desktop to easily control the distinct columns.
-            On mobile (flex-col), they stack vertically.
-        */}
+        {/* --- GRID LAYOUT --- */}
         <div className="flex flex-col md:flex-row gap-4 md:h-[550px]">
           
           {/* COLUMN 1: Left side (2 stacked images) */}
           <div className="flex flex-col gap-4 items-center md:items-end">
             
-            {/* Image 1: Size 255x305 */}
+            {/* Image 1 */}
             <div className="w-full md:w-[255px] h-64 md:h-[305px] rounded-3xl overflow-hidden relative shadow-lg">
                <motion.img 
                  whileHover={{ scale: 1.05 }}
@@ -130,7 +123,7 @@ const OgHero = () => {
                />
             </div>
 
-            {/* Image 2: Size 255x231 */}
+            {/* Image 2 */}
             <div className="w-full md:w-[255px] h-48 md:h-[231px] rounded-3xl overflow-hidden relative shadow-lg">
               <motion.img 
                  whileHover={{ scale: 1.05 }}
@@ -145,8 +138,7 @@ const OgHero = () => {
           {/* COLUMN 2: Right side (1 tall image) */}
           <div className="flex flex-col md:justify-center">
             
-            {/* Image 3: Size 255x404 */}
-            {/* Margin Top (mt-20) creates the staggered/masonry look */}
+            {/* Image 3 */}
             <div className="w-full md:w-[255px] h-80 md:h-[404px] rounded-3xl overflow-hidden relative shadow-lg mt-0 md:mt-20">
                <motion.img 
                  whileHover={{ scale: 1.05 }}
@@ -159,16 +151,14 @@ const OgHero = () => {
           </div>
 
 
-          {/* --- FLOATING CENTER BADGE --- 
-              Positioned absolutely in the center of the grid container.
-          */}
+          {/* --- FLOATING CENTER BADGE --- */}
           <motion.div 
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.8, type: "spring" }}
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none"
           >
-            {/* The Badge Circle (White border, Yellow bg) */}
+            {/* The Badge Circle */}
             <div className="relative w-24 h-24 md:w-28 md:h-28 bg-yellow-400 rounded-full flex items-center justify-center border-4 border-white shadow-xl pointer-events-auto">
               
               {/* Spinning dashed ring animation */}
@@ -183,7 +173,7 @@ const OgHero = () => {
                 <FaPaperPlane size={20} className="transform translate-x-0.5 translate-y-0.5" />
               </div>
 
-              {/* Curved Text Effect (Simulated with rotation) */}
+              {/* Curved Text Effect */}
               <span className="absolute text-[10px] font-bold text-white tracking-widest uppercase transform -rotate-12 -translate-y-8 drop-shadow-md">
                 Join Now
               </span>

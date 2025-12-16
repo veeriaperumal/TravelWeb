@@ -92,12 +92,12 @@ const OgTestimonials = () => {
     visible: {
       x: 0,
       opacity: 1,
-      transition: { duration: 0.5, ease: "easeOut" },
+      transition: { duration: 0.5, ease: [0, 0, 0.2, 1] },
     },
     exit: (direction: number) => ({
       x: direction > 0 ? -50 : 50,
       opacity: 0,
-      transition: { duration: 0.3, ease: "easeIn" },
+      transition: { duration: 0.3,  ease: [0.4, 0.0, 1, 1] },
     }),
   };
 
