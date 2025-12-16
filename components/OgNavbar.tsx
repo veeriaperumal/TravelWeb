@@ -32,7 +32,7 @@ const OgNavbar = () => {
     <motion.nav 
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0, 0, 0.2, 1]}}
+      transition={{ duration: 0.8, ease: [0, 0, 0.2, 1] as [number, number, number, number]}}
       className="fixed top-0 w-full bg-white/90 backdrop-blur-md py-4 px-6 md:px-12 relative z-50 shadow-sm"
     >
       <div className="flex justify-between items-center font-sans max-w-7xl mx-auto">

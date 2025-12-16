@@ -31,7 +31,7 @@ const TripPlannerCTA = () => {
         <motion.h2 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0, 0, 0.2, 1]}}
+          transition={{ duration: 0.6, ease: [0, 0, 0.2, 1] as [number, number, number, number]}}
           viewport={{ once: true }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight drop-shadow-md"
         >

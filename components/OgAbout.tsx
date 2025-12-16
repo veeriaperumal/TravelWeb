@@ -48,7 +48,7 @@ const OgAbout = () => {
               */}
               <motion.div 
                 animate={{ y: [0, -8, 0] }} // Gentle float animation
-                transition={{ duration: 5, repeat: Infinity, ease: [0.4, 0.0, 0.2, 1] }}
+                transition={{ duration: 5, repeat: Infinity, ease: [0.4, 0.0, 0.2, 1] as [number, number, number, number] }}
                 className="absolute -top-12 -right-12 md:-right-24 z-20 rounded-2xl overflow-hidden shadow-xl border-4 border-white"
               >
                  <Image 
@@ -65,7 +65,7 @@ const OgAbout = () => {
               */}
               <motion.div 
                  animate={{ y: [0, 8, 0] }} // Gentle float animation (reverse phase)
-                 transition={{ duration: 6, repeat: Infinity, ease: [0.4, 0.0, 0.2, 1], delay: 1 }}
+                 transition={{ duration: 6, repeat: Infinity, ease: [0.4, 0.0, 0.2, 1] as [number, number, number, number], delay: 1 }}
                  className="absolute -bottom-12 -right-8 md:-right-20 z-30 rounded-2xl overflow-hidden shadow-xl border-4 border-white"
               >
                  <Image 

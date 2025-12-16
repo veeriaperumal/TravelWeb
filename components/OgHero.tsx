@@ -27,7 +27,7 @@ const OgHero = () => {
     visible: { 
       y: 0, 
       opacity: 1, 
-      transition: { duration: 0.6, ease: [0.4, 0.0, 0.2, 1] } 
+      transition: { duration: 0.6, ease: [0.4, 0.0, 0.2, 1] as [number, number, number, number]} 
     }
   };
 
@@ -164,7 +164,8 @@ const OgHero = () => {
               {/* Spinning dashed ring animation */}
               <motion.div 
                 animate={{ rotate: 360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 10, repeat: Infinity,ease: [0, 0, 1, 1] as [number, number, number, number]
+}}
                 className="absolute w-full h-full rounded-full border-2 border-dashed border-white opacity-60"
               />
               
