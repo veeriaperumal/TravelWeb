@@ -1,13 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  FaQuoteLeft,
-  FaQuoteRight,
-  FaStar,
-  FaArrowLeft,
-  FaArrowRight,
-} from "react-icons/fa";
+import { FaStar, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 // --- Data Configuration ---
@@ -31,12 +26,11 @@ const testimonials = [
     name: "Jason & Mike",
     image:
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=600&auto=format&fit=crop",
-    text: "We explored the Swiss Alps with OG Holidays and it was breathtaking. The guides were knowledgeable, the hotels were cozy, and everything ran like clockwork. Can’t wait to book our next adventure!",
+    text: "We explored the Swiss Alps with OG Holidays and it was breathtaking. The guides were knowledgeable, the hotels were cozy, and everything ran like clockwork. Can't wait to book our next adventure!",
   },
 ];
 
 // --- Sub-Component: Navigation Button ---
-// Reusable button with hover scaling and color transition
 const NavButton = ({
   onClick,
   icon,
@@ -50,7 +44,7 @@ const NavButton = ({
     onClick={onClick}
     whileHover={{
       scale: 1.15,
-      backgroundColor: "#fbbf24", // yellow-400
+      backgroundColor: "#fbbf24",
       color: "#ffffff",
       borderColor: "#fbbf24",
       boxShadow: "0px 8px 15px rgba(251, 191, 36, 0.3)",
@@ -68,7 +62,6 @@ const NavButton = ({
 // --- Main Component ---
 const OgTestimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  // We track direction to animate slide-in from left or right
   const [direction, setDirection] = useState(0);
 
   const handleNext = () => {
@@ -83,7 +76,6 @@ const OgTestimonials = () => {
     );
   };
 
-  // Animation variants for the card content
   const slideVariants = {
     hidden: (direction: number) => ({
       x: direction > 0 ? 50 : -50,
@@ -92,12 +84,18 @@ const OgTestimonials = () => {
     visible: {
       x: 0,
       opacity: 1,
-      transition: { duration: 0.5, ease: [0, 0, 0.2, 1] as [number, number, number, number]},
+      transition: {
+        duration: 0.5,
+        ease: [0, 0, 0.2, 1] as [number, number, number, number],
+      },
     },
     exit: (direction: number) => ({
       x: direction > 0 ? -50 : 50,
       opacity: 0,
-      transition: { duration: 0.3,  ease: [0.4, 0.0, 1, 1] as [number, number, number, number]},
+      transition: {
+        duration: 0.3,
+        ease: [0.4, 0.0, 1, 1] as [number, number, number, number],
+      },
     }),
   };
 
@@ -105,7 +103,6 @@ const OgTestimonials = () => {
     <section
       className="relative w-full py-16 md:py-24 overflow-hidden"
       style={{
-        // Applied specific linear gradient from requirements
         background:
           "linear-gradient(180deg, rgba(239, 195, 86, 0.1) 0%, rgba(239, 195, 86, 0) 100%)",
       }}
@@ -138,7 +135,6 @@ const OgTestimonials = () => {
 
         {/* --- Carousel Wrapper --- */}
         <div className="relative w-full flex justify-center items-center">
-          
           {/* Desktop Navigation: Prev Button */}
           <div className="hidden md:block absolute left-0 right-10 lg:left-8 z-20">
             <NavButton onClick={handlePrev} icon={<FaArrowLeft size={18} />} />
@@ -152,9 +148,26 @@ const OgTestimonials = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              {/* Decorative Background Quotes */}
-              <FaQuoteLeft className="absolute top-8 left-8 text-yellow-50 text-6xl md:text-8xl -z-0" />
-              <FaQuoteRight className="absolute bottom-8 right-8 text-yellow-50 text-6xl md:text-8xl -z-0" />
+              {/* Decorative Background Quotes - Fixed positioning and size */}
+              {/* <div className="absolute -top-8 -left-6 z-0 opacity-30">
+                <Image
+                  src="/assets/left-quotes.png"
+                  alt="Opening quote"
+                  width={120}
+                  height={120}
+                  className="md:w-[150px] md:h-[150px]"
+                /> */}
+              {/* </div> */}
+
+              {/* <div className="absolute -bottom-8 -right-6 z-0 opacity-30">
+                <Image
+                  src="/assets/right-quotes.png"
+                  alt="Closing quote"
+                  width={120}
+                  height={120}
+                  className="md:w-[150px] md:h-[150px]"
+                />
+              </div> */}
 
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
@@ -166,19 +179,17 @@ const OgTestimonials = () => {
                   exit="exit"
                   className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center"
                 >
-                  
                   {/* --- Left Column: Image & Profile Info --- */}
-                  <div className="md:col-span-4 flex flex-col items-center justify-center text-center">
-                    
-                    {/* Image Container with pulsing effect */}
-                    <div className="relative w-40 h-40 md:w-56 md:h-56 mb-6">
-                      <motion.div 
+                  <div className="md:col-span-4 flex flex-col items-center justify-center">
+                    {/* Image Container - Smaller as per design */}
+                    <div className="relative w-32 h-32 md:w-40 md:h-40 mb-6">
+                      <motion.div
                         animate={{ scale: [1, 1.05, 1] }}
                         transition={{ duration: 4, repeat: Infinity }}
-                        className="absolute inset-0 bg-yellow-200 rounded-full blur-xl opacity-40" 
+                        className="absolute inset-0 bg-yellow-200 rounded-full blur-xl opacity-40"
                       />
                       <motion.div
-                        className="w-full h-full rounded-full overflow-hidden border-[6px] border-white shadow-xl relative z-10"
+                        className="w-full h-full rounded-full overflow-hidden border-[5px] border-white shadow-xl relative z-10"
                         whileHover={{ scale: 1.05, rotate: -2 }}
                         transition={{ type: "spring", stiffness: 300 }}
                       >
@@ -190,43 +201,90 @@ const OgTestimonials = () => {
                       </motion.div>
                     </div>
 
-                    {/* Name and Role (Moved below image as requested) */}
+                    {/* Name and Role - Better typography as per design */}
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2 }}
+                      className="text-center"
                     >
-                      <h4 className="text-gray-900 text-xl md:text-2xl font-bold mb-1">
+                      <h4 className="text-gray-900 text-lg md:text-xl font-bold mb-2">
                         {testimonials[currentIndex].name}
                       </h4>
-                      <div className="inline-block px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold uppercase tracking-wider rounded-full">
-                        Happy Travellers
+                      <div className="inline-flex items-center gap-2">
+                        {/* Stars - Now aligned horizontally and properly sized */}
+                        <div className="flex gap-1 text-yellow-400">
+                          {[...Array(5)].map((_, i) => (
+                            <motion.span
+                              key={i}
+                              initial={{ opacity: 0, scale: 0 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: 0.1 + i * 0.05 }}
+                            >
+                              <FaStar size={16} />
+                            </motion.span>
+                          ))}
+                        </div>
+                        <span className="text-gray-600 text-sm font-medium">
+                          Happy Travellers
+                        </span>
                       </div>
                     </motion.div>
                   </div>
 
                   {/* --- Right Column: Text Content --- */}
-                  <div className="md:col-span-8 flex flex-col items-center md:items-start text-center md:text-left">
-                    {/* Star Ratings with stagger animation */}
-                    <div className="flex gap-1 text-yellow-400 mb-6 text-xl">
-                      {[...Array(5)].map((_, i) => (
-                        <motion.span
-                          key={i}
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.1 + i * 0.05 }}
-                        >
-                          <FaStar />
-                        </motion.span>
-                      ))}
+                  <div className="md:col-span-8 flex flex-col">
+                    {/* Review Text - Better typography and spacing */}
+                    <div className="relative pl-4 md:pl-6">
+                      {/* Inline quote mark at the start */}
+                      <div className="absolute -left-6 -top-4 text-yellow-400 opacity-95">
+                        <Image
+                          src="/assets/left-quotes.png"
+                          alt="Opening quote"
+                          width={40}
+                          height={40}
+                          className="opacity-80"
+                        />
+                      </div>
+                      
+                      <p className="text-gray-700 text-base md:text-lg leading-relaxed font-medium mb-4">
+                        {testimonials[currentIndex].text}
+                      </p>
+                      
+                      {/* Inline quote mark at the end */}
+                      <div className="absolute -right-1.25 -bottom-4 text-yellow-400 opacity-95">
+                        <Image
+                          src="/assets/right-quotes.png"
+                          alt="Closing quote"
+                          width={40}
+                          height={40}
+                          className="opacity-80"
+                        />
+                      </div>
                     </div>
 
-                    {/* Review Text */}
-                    <p className="text-gray-600 text-lg md:text-xl leading-relaxed font-medium italic relative">
-                      {testimonials[currentIndex].text}
-                    </p>
+                    {/* Additional rating info - Like in the design */}
+                    <div className="mt-6 pt-6 border-t border-gray-100">
+                      <div className="flex items-center justify-between">
+                        <div className="text-left">
+                          <div className="text-yellow-600 font-bold text-lg">
+                            5.0
+                          </div>
+                          <div className="text-gray-500 text-sm">
+                            Overall Rating
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-gray-900 font-semibold">
+                            Excellent Service
+                          </div>
+                          <div className="text-gray-500 text-sm">
+                            Verified Review
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-
                 </motion.div>
               </AnimatePresence>
             </motion.div>
@@ -236,7 +294,6 @@ const OgTestimonials = () => {
           <div className="hidden md:block absolute right-0 lg:right-8 z-20">
             <NavButton onClick={handleNext} icon={<FaArrowRight size={18} />} />
           </div>
-
         </div>
 
         {/* --- Mobile Navigation --- */}
@@ -245,6 +302,23 @@ const OgTestimonials = () => {
           <NavButton onClick={handleNext} icon={<FaArrowRight />} />
         </div>
 
+        {/* --- Dots Indicator --- */}
+        <div className="flex gap-2 mt-8">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setDirection(index > currentIndex ? 1 : -1);
+                setCurrentIndex(index);
+              }}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                index === currentIndex
+                  ? "w-8 bg-yellow-500"
+                  : "bg-gray-300 hover:bg-gray-400"
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

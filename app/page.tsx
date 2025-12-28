@@ -7,6 +7,9 @@ import HeroSearch from '@/components/HeroSearch';
 import OgContact from '../components/OgContact'; 
 // Import the new Banner Component
 import TripPlannerCTA from '../components/TripPlannerCTA'; 
+import FAQSection from '@/components/FAQSection';
+import Newsletter from '@/components/Newsletter';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -42,6 +45,9 @@ export default function Home() {
 
       </div>
       <TripPlannerCTA/>
+      <FAQSection/>
+      <Newsletter/>
+      <Footer/>
     </main>
   );
 }
