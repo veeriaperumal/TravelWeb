@@ -17,16 +17,20 @@ const OgNavbar = () => {
   ];
 
   // Function to handle smooth scrolling and setting active state
-  const handleScroll = (e, id, name) => {
-    e.preventDefault();
-    setActiveLink(name);
-    setIsOpen(false); // Close mobile menu if open
+const handleScroll = (
+  e: React.MouseEvent<HTMLAnchorElement>,
+  id: string,
+  name: string
+) => {
+  e.preventDefault();
+  setActiveLink(name);
+  setIsOpen(false);
 
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
   return (
     <motion.nav 
