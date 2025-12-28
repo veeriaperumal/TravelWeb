@@ -34,7 +34,7 @@ const OgAbout = () => {
               {/* 1. MAIN IMAGE (305x355) */}
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
                 <Image 
-                  src="/assets/main-image.png" // Put your image in public/assets
+                  src="/images/main-image.png" // Put your image in public/assets
                   alt="Main Feature"
                   width={305}
                   height={355}
@@ -52,7 +52,7 @@ const OgAbout = () => {
                 className="absolute -top-12 -right-12 md:-right-24 z-20 rounded-2xl overflow-hidden shadow-xl border-4 border-white"
               >
                  <Image 
-                  src="/assets/right-up-image.png" 
+                  src="/images/right-up-image.png" 
                   alt="Detail Upper"
                   width={217}
                   height={236}
@@ -69,7 +69,7 @@ const OgAbout = () => {
                  className="absolute -bottom-12 -right-8 md:-right-20 z-30 rounded-2xl overflow-hidden shadow-xl border-4 border-white"
               >
                  <Image 
-                  src="/assets/right-bottom-image.png" 
+                  src="/images/right-bottom-image.png" 
                   alt="Detail Lower"
                   width={192}
                   height={234}
