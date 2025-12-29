@@ -1,57 +1,54 @@
 import OgNavbar from '../components/OgNavbar';
 import OgHero from '../components/OgHero';
 import OgAbout from '../components/OgAbout';
-import OgTestimonials from '../components/OgTestimonials'; 
-import OgStats from '../components/OgStats'; 
+import OgTestimonials from '../components/OgTestimonials';
+import OgStats from '../components/OgStats';
 import HeroSearch from '@/components/HeroSearch';
-import OgContact from '../components/OgContact'; 
-// Import the new Banner Component
-import TripPlannerCTA from '../components/TripPlannerCTA'; 
+import OgContact from '../components/OgContact';
+import TripPlannerCTA from '../components/TripPlannerCTA';
 import FAQSection from '@/components/FAQSection';
 import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
-// import Header from '../components/layout/Header';
-// import TopBar from '@/components/layout/TopBar';
+
+// ✅ IMPORT SERVICES
+import ServicesHomeSection from '@/components/ServicesHomeSection';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white ">
+    <main className="min-h-screen bg-white">
       <div className="relative z-10">
 
-        
-        
         {/* Navigation */}
         <OgNavbar />
 
-        {/* 1. HOME SECTION */}
+        {/* HOME */}
         <div id="home">
           <OgHero />
           <HeroSearch />
         </div>
 
-        {/* 2. SERVICES SECTION */}
+        {/* SERVICES */}
         <div id="services">
-          <OgAbout />
+          <ServicesHomeSection />
         </div>
 
-        {/* 3. PACKAGES / REVIEWS SECTION */}
+        {/* PACKAGES */}
         <div id="packages">
           <OgTestimonials />
           <OgStats />
         </div>
 
-       
-
-        {/* 5. CONTACT SECTION */}
+        {/* CONTACT */}
         <div id="contact">
           <OgContact />
         </div>
-
       </div>
-      <TripPlannerCTA/>
-      <FAQSection/>
-      <Newsletter/>
-      <Footer/>
+
+      {/* Footer Sections */}
+      <TripPlannerCTA />
+      <FAQSection />
+      <Newsletter />
+      <Footer />
     </main>
   );
 }
