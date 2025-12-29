@@ -3,10 +3,13 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, Variants, easeOut } from 'framer-motion';
 import { Facebook, Twitter, Youtube, Instagram } from 'lucide-react';
 
 const Footer = () => {
+  /* ----------------------------------
+     Data
+  ----------------------------------- */
   const navItems = [
     { name: 'About Us', id: 'about' },
     { name: 'Services', id: 'services' },
@@ -32,98 +35,123 @@ const Footer = () => {
     '/footer/footer-6.png',
   ];
 
+  /* ----------------------------------
+     Smooth Scroll Handler
+  ----------------------------------- */
   const handleScroll = (e: React.MouseEvent<HTMLElement>, id: string) => {
     e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - headerOffset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-    }
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    const offset = 80;
+    const top =
+      target.getBoundingClientRect().top + window.scrollY - offset;
+
+    window.scrollTo({ top, behavior: 'smooth' });
   };
 
-  // --- Animation Variants ---
-  const fadeInUp = {
+  /* ----------------------------------
+     Framer Motion Variants (STRICT)
+  ----------------------------------- */
+  const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.6, ease: "easeOut" } 
-    }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: easeOut,
+      },
+    },
   };
 
-  const staggerContainer = {
+  const staggerContainer: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { 
-        staggerChildren: 0.1, // Elements appear one after another
-        delayChildren: 0.1 
-      }
-    }
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
   };
 
-  const socialIconHover = {
-    hover: { y: -4, scale: 1.1, transition: { type: "spring", stiffness: 400 } },
-    tap: { scale: 0.9 }
+  const socialIconVariants: Variants = {
+    hover: {
+      y: -4,
+      scale: 1.1,
+      transition: {
+        type: 'spring',
+        stiffness: 400,
+      },
+    },
+    tap: {
+      scale: 0.9,
+    },
   };
 
+  /* ----------------------------------
+     JSX
+  ----------------------------------- */
   return (
-    <footer className="w-full relative bg-[#FDFBF7] text-gray-600 font-sans mt-8 overflow-hidden border-t border-gray-100">
-      <motion.div 
+    <footer className="relative w-full bg-[#FDFBF7] border-t border-gray-100 overflow-hidden">
+      <motion.div
+        variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
-        variants={staggerContainer}
         className="max-w-[1200px] mx-auto px-6 lg:px-10 pt-20 pb-16"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          
-          {/* COLUMN 1: Brand */}
-          <motion.div variants={fadeInUp} className="flex flex-col space-y-5">
-            <motion.div 
+          {/* Brand */}
+          <motion.div variants={fadeInUp} className="space-y-5">
+            <motion.div
               whileHover={{ scale: 1.02 }}
-              className="flex items-center text-3xl font-bold tracking-tight cursor-pointer origin-left"
               onClick={(e) => handleScroll(e, 'home')}
+              className="flex items-center text-3xl font-bold cursor-pointer"
             >
               <span className="text-[#EBCB66]">OG</span>
-              <span className="text-[#1A1A1A] ml-1">Holidays</span>
+              <span className="ml-1 text-[#1A1A1A]">Holidays</span>
             </motion.div>
-            <p className="text-gray-500 leading-relaxed text-m font-bold max-w-[240px]">
-              Delivering perfect holidays with comfort, safety, and <br /> great value
+
+            <p className="text-gray-500 text-sm font-semibold max-w-[240px] leading-relaxed">
+              Delivering perfect holidays with comfort, safety,
+              <br /> and great value.
             </p>
+
             <div className="flex gap-3">
-              {socialLinks.map((social, idx) => (
-                <motion.div 
-                  key={idx} 
-                  variants={socialIconHover}
+              {socialLinks.map((item, i) => (
+                <motion.div
+                  key={i}
+                  variants={socialIconVariants}
                   whileHover="hover"
                   whileTap="tap"
                 >
                   <Link
-                    href={social.href}
-                    className="w-9 h-9 bg-[#EBCB66] text-white rounded-full flex items-center justify-center hover:bg-[#d4b04d] transition-colors shadow-sm"
+                    href={item.href}
+                    className="w-9 h-9 flex items-center justify-center rounded-full bg-[#EBCB66] text-white shadow-sm hover:bg-[#d4b04d]"
                   >
-                    {social.icon}
+                    {item.icon}
                   </Link>
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* COLUMN 2: Quick Links */}
+          {/* Quick Links */}
           <motion.div variants={fadeInUp}>
-            <h3 className="text-[#1A1A1A] font-bold text-xl mb-6">Quick Links</h3>
+            <h3 className="text-xl font-bold text-[#1A1A1A] mb-6">
+              Quick Links
+            </h3>
             <ul className="space-y-4">
               {navItems.map((item) => (
-                <li key={item.name}>
+                <li key={item.id}>
                   <motion.a
-                    whileHover={{ x: 6, color: '#EBCB66' }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     href={`#${item.id}`}
                     onClick={(e) => handleScroll(e, item.id)}
-                    className="text-gray-500 transition-colors text-[16px] cursor-pointer inline-block"
+                    whileHover={{ x: 6, color: '#EBCB66' }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                    className="inline-block text-gray-500 text-sm font-medium"
                   >
                     {item.name}
                   </motion.a>
@@ -132,46 +160,44 @@ const Footer = () => {
             </ul>
           </motion.div>
 
-          {/* COLUMN 3: Contact Info */}
+          {/* Contact */}
           <motion.div variants={fadeInUp}>
-            <h3 className="text-[#1A1A1A] font-bold text-xl mb-6">Get In Touch</h3>
-            <ul className="space-y-6">
-              {[
-                { icon: 'phone', val: '+1 12345 67890' },
-                { icon: 'mail', val: 'example@gmail.com' },
-                { icon: 'loc', val: <>1014 N Main St, Miami, <br /> Oklahoma, 74354, USA</> }
-              ].map((contact, i) => (
-                <motion.li 
-                  key={i}
-                  whileHover={{ x: 4 }}
-                  className="flex items-center gap-4 group"
-                >
-                  <div className="w-10 h-10 rounded-full bg-[#EBCB66] flex items-center justify-center flex-shrink-0 text-white shadow-sm transition-transform duration-300 group-hover:rotate-12">
-                    {contact.icon === 'phone' && <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.82 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" /></svg>}
-                    {contact.icon === 'mail' && <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" /></svg>}
-                    {contact.icon === 'loc' && <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z" /></svg>}
-                  </div>
-                  <span className="text-gray-600 text-[15px] font-medium">{contact.val}</span>
-                </motion.li>
-              ))}
+            <h3 className="text-xl font-bold text-[#1A1A1A] mb-6">
+              Get In Touch
+            </h3>
+            <ul className="space-y-6 text-sm font-medium text-gray-600">
+              <li>+1 12345 67890</li>
+              <li>example@gmail.com</li>
+              <li>
+                1014 N Main St, Miami,
+                <br />
+                Oklahoma, 74354, USA
+              </li>
             </ul>
           </motion.div>
 
-          {/* COLUMN 4: Instagram Grid */}
+          {/* Instagram */}
           <motion.div variants={fadeInUp}>
-            <h3 className="text-[#1A1A1A] font-bold text-xl mb-6">Follow Us</h3>
+            <h3 className="text-xl font-bold text-[#1A1A1A] mb-6">
+              Follow Us
+            </h3>
             <div className="grid grid-cols-3 gap-2 max-w-[260px]">
-              {instaImages.map((src, index) => (
+              {instaImages.map((src, i) => (
                 <motion.div
-                  key={index}
+                  key={i}
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  whileHover={{ scale: 1.05, rotate: 2, zIndex: 10 }}
-                  className="relative aspect-square bg-gray-100 rounded-md overflow-hidden border border-gray-100 shadow-sm cursor-pointer"
+                  transition={{ delay: i * 0.05 }}
+                  whileHover={{ scale: 1.05 }}
+                  className="relative aspect-square rounded-md overflow-hidden border bg-gray-100"
                 >
-                  <Image src={src} alt="Instagram" fill className="object-cover" />
+                  <Image
+                    src={src}
+                    alt="Instagram image"
+                    fill
+                    className="object-cover"
+                  />
                 </motion.div>
               ))}
             </div>
@@ -179,12 +205,12 @@ const Footer = () => {
         </div>
       </motion.div>
 
-      {/* COPYRIGHT BAR */}
-      <motion.div 
-        initial={{ y: 20, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.5 }}
-        className="w-full bg-[#EBCB66] py-5 text-center"
+      {/* Copyright */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="bg-[#EBCB66] py-5 text-center"
       >
         <p className="text-white text-sm font-semibold tracking-wide">
           © {new Date().getFullYear()} ALL RIGHTS RESERVED
