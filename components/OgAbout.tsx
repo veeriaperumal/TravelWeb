@@ -1,133 +1,120 @@
 "use client";
 
 import React from "react";
-import Image from "next/image"; 
-import { motion } from "framer-motion"; 
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { Dancing_Script } from "next/font/google"; 
+import { Dancing_Script } from "next/font/google";
 
 const scriptFont = Dancing_Script({ subsets: ["latin"], weight: ["400", "700"] });
 
 const OgAbout = () => {
   return (
     <section className="relative w-full overflow-hidden bg-white py-20 lg:py-28">
-      
-      {/* Decorative Left Edge */}
-      <div className="absolute left-0 top-0 bottom-0 w-4 md:w-12 bg-[#1a1a1a] z-10 hidden xl:block" />
-
       <div className="container mx-auto px-4 md:px-8 relative z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           
-          {/* ================= LEFT COLUMN: 3 IMAGE COLLAGE ================= */}
-          <motion.div 
+          {/* ================= LEFT COLUMN: IMAGE COLLAGE ================= */}
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="relative flex justify-center lg:justify-start"
+            className="relative pt-5"
           >
-            {/* Yellow Background Blob */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#F2C94C]/20 rounded-full blur-3xl -z-10" />
-
-            {/* Collage Container: fixed width for consistent alignment */}
-            <div className="relative w-[320px] md:w-[360px]">
-
-              {/* 1. MAIN IMAGE (centered) */}
-              <div className="relative z-20 rounded-3xl overflow-hidden shadow-2xl border-4 border-white w-full">
+            {/* Collage Container */}
+            <div className="relative w-full max-w-[600px] h-[500px] md:h-[600px] mx-auto lg:mx-0">
+              
+              {/* 1. MAIN IMAGE (Large Left) */}
+              <div className="relative z-10 rounded-[2rem] overflow-hidden w-[70%] h-[80%] shadow-2xl">
                 <Image
-                  src="/images/main-image.png"
-                  alt="Main Feature"
-                  width={320}
-                  height={370}
-                  className="object-cover w-full h-auto"
+                  src="/images/main-image.png" 
+                  alt="OG Holidays Team"
+                  fill
+                  className="object-cover"
+                  priority
                 />
               </div>
 
-              {/* 2. RIGHT UP IMAGE (positioned top-right) */}
+              {/* 2. TOP RIGHT IMAGE (The one that wasn't working) */}
               <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: [0.4, 0.0, 0.2, 1] as [number, number, number, number] }}
-                className="absolute -top-6 md:-top-10 right-[-24px] md:right-[-36px] z-30 rounded-2xl overflow-hidden shadow-xl border-4 border-white w-40 md:w-52"
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                viewport={{ once: true }}
+                className="absolute top-0 right-0 z-30 w-[45%] h-[40%] rounded-[2rem] overflow-hidden shadow-xl border-4 border-white"
               >
                 <Image
-                  src="/images/right-up-image.png"
-                  alt="Detail Upper"
-                  width={217}
-                  height={236}
-                  className="object-cover w-full h-auto"
+                  src="/images/right-up-image.png" 
+                  alt="OG Holidays Feature"
+                  fill
+                  className="object-cover"
                 />
               </motion.div>
 
-              {/* 3. RIGHT BOTTOM IMAGE (positioned bottom-right) */}
+              {/* 3. BOTTOM RIGHT IMAGE */}
               <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: [0.4, 0.0, 0.2, 1] as [number, number, number, number], delay: 1 }}
-                className="absolute -bottom-6 md:-bottom-12 right-[-12px] md:right-[-28px] z-10 rounded-2xl overflow-hidden shadow-xl border-4 border-white w-36 md:w-44"
+                initial={{ scale: 0.9, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                viewport={{ once: true }}
+                className="absolute bottom-[-5%] right-[5%] z-20 rounded-[2rem] overflow-hidden shadow-2xl w-[50%] h-[45%] border-4 border-white"
               >
                 <Image
                   src="/images/right-bottom-image.png"
-                  alt="Detail Lower"
-                  width={192}
-                  height={234}
-                  className="object-cover w-full h-auto"
+                  alt="Travel Group"
+                  fill
+                  className="object-cover"
                 />
               </motion.div>
-
             </div>
           </motion.div>
 
           {/* ================= RIGHT COLUMN: TEXT CONTENT ================= */}
-          <motion.div 
-             initial={{ opacity: 0, x: 50 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             transition={{ duration: 0.8, delay: 0.2 }}
-             className="relative mt-12 lg:mt-0"
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative lg:pl-12"
           >
-            {/* Background Dotted Path SVG */}
-            <div className="absolute top-0 right-0 w-full h-full pointer-events-none opacity-20 z-0">
-               <svg viewBox="0 0 400 400" className="w-full h-full">
-                 <path 
-                   d="M 50 300 Q 150 350 250 200 T 350 50" 
-                   fill="none" 
-                   stroke="#F2C94C" 
-                   strokeWidth="2" 
-                   strokeDasharray="8,8"
-                 />
-                 <path d="M 340 60 L 360 40 L 340 50 Z" fill="#F2C94C" />
-               </svg>
-            </div>
-
             <div className="relative z-10">
-              <h3 className={`${scriptFont.className} text-[#4A90E2] text-3xl mb-2`}>
+              <h3 className={`${scriptFont.className} text-[#4A90E2] text-3xl mb-1`}>
                 Get About Us
               </h3>
-              
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                More About <span className="text-gray-900">Travelsy</span>
+
+              <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-8 tracking-tight">
+                More About Travelsy
               </h2>
 
-              <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                OG Holidays is your trusted travel partner, offering personalised holiday plans, expert guidance, and exclusive deals to make every trip smooth and memorable. 
-                <br /><br />
-                We create tailored itineraries based on your interests, budget, and travel style, ensuring a hassle-free experience from planning to return. With dedicated support and curated destination insights, we're here to turn your dream vacations into unforgettable journeys.
+              <p className="text-gray-600 text-lg font-medium leading-relaxed mb-10 max-w-xl">
+                OG Holidays is your trusted travel partner, offering personalised
+                holiday plans, expert guidance, and exclusive deals to make every
+                trip smooth and memorable. We create tailored itineraries based on
+                your interests, budget, and travel style.
               </p>
 
-              <button className="
-                group relative flex items-center gap-3
-                bg-[#F2C94C] hover:bg-[#E0B02C]
-                text-white font-bold px-8 py-4 rounded-full
-                shadow-lg hover:shadow-xl hover:shadow-yellow-400/30
-                transition-all duration-300 transform hover:-translate-y-1
-              ">
-                <span>Read More</span>
-                <ArrowRight 
-                  size={20} 
-                  className="group-hover:translate-x-1 transition-transform duration-300" 
+              <button className="group flex items-center gap-4 bg-[#F2C94C] hover:bg-[#E0B02C] text-white font-extrabold px-10 py-4 rounded-full shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <span className="text-lg">Read More</span>
+                <ArrowRight
+                  size={24}
+                  className="group-hover:translate-x-2 transition-transform duration-300"
                 />
               </button>
             </div>
 
+            {/* SVG Flight Path */}
+            <div className="absolute -right-10 bottom-0 w-72 h-72 pointer-events-none opacity-20">
+               <svg viewBox="0 0 200 200" className="w-full h-full text-[#F2C94C]">
+                 <path 
+                    d="M10,180 Q50,200 100,100 T190,40" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeDasharray="8,8" 
+                 />
+                 <path d="M185,35 L195,40 L188,48 Z" fill="currentColor" />
+               </svg>
+            </div>
           </motion.div>
-
         </div>
       </div>
     </section>
