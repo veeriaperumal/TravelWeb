@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { FaPaperPlane } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import { motion, easeOut} from 'framer-motion';
 
 const OgHero = () => {
   // =========================================
@@ -21,7 +21,7 @@ const OgHero = () => {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.6, ease: 'easeOut' },
+      transition: { duration: 0.6, ease: easeOut },
     },
   };
 
