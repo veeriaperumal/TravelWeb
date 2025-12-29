@@ -28,52 +28,47 @@ const OgAbout = () => {
             {/* Yellow Background Blob */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#F2C94C]/20 rounded-full blur-3xl -z-10" />
 
-            {/* Collage Container: Size roughly based on main image + offsets */}
-            <div className="relative w-fit">
-              
-              {/* 1. MAIN IMAGE (305x355) */}
-              <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                <Image 
-                  src="/images/main-image.png" // Put your image in public/assets
+            {/* Collage Container: fixed width for consistent alignment */}
+            <div className="relative w-[320px] md:w-[360px]">
+
+              {/* 1. MAIN IMAGE (centered) */}
+              <div className="relative z-20 rounded-3xl overflow-hidden shadow-2xl border-4 border-white w-full">
+                <Image
+                  src="/images/main-image.png"
                   alt="Main Feature"
-                  width={305}
-                  height={355}
-                  className="object-fill"
-                  
+                  width={320}
+                  height={370}
+                  className="object-cover w-full h-auto"
                 />
               </div>
 
-              {/* 2. RIGHT UP IMAGE (217x236) 
-                  Positioned absolute to the top-right of the main image
-              */}
-              <motion.div 
-                animate={{ y: [0, -8, 0] }} // Gentle float animation
+              {/* 2. RIGHT UP IMAGE (positioned top-right) */}
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: [0.4, 0.0, 0.2, 1] as [number, number, number, number] }}
-                className="absolute -top-12 -right-12 md:-right-24 z-20 rounded-2xl overflow-hidden shadow-xl border-4 border-white"
+                className="absolute -top-6 md:-top-10 right-[-24px] md:right-[-36px] z-30 rounded-2xl overflow-hidden shadow-xl border-4 border-white w-40 md:w-52"
               >
-                 <Image 
-                  src="/images/right-up-image.png" 
+                <Image
+                  src="/images/right-up-image.png"
                   alt="Detail Upper"
                   width={217}
                   height={236}
-                  className="object-cover"
+                  className="object-cover w-full h-auto"
                 />
               </motion.div>
 
-              {/* 3. RIGHT BOTTOM IMAGE (192x234) 
-                  Positioned absolute to the bottom-right of the main image
-              */}
-              <motion.div 
-                 animate={{ y: [0, 8, 0] }} // Gentle float animation (reverse phase)
-                 transition={{ duration: 6, repeat: Infinity, ease: [0.4, 0.0, 0.2, 1] as [number, number, number, number], delay: 1 }}
-                 className="absolute -bottom-12 -right-8 md:-right-20 z-30 rounded-2xl overflow-hidden shadow-xl border-4 border-white"
+              {/* 3. RIGHT BOTTOM IMAGE (positioned bottom-right) */}
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: [0.4, 0.0, 0.2, 1] as [number, number, number, number], delay: 1 }}
+                className="absolute -bottom-6 md:-bottom-12 right-[-12px] md:right-[-28px] z-10 rounded-2xl overflow-hidden shadow-xl border-4 border-white w-36 md:w-44"
               >
-                 <Image 
-                  src="/images/right-bottom-image.png" 
+                <Image
+                  src="/images/right-bottom-image.png"
                   alt="Detail Lower"
                   width={192}
                   height={234}
-                  className="object-cover"
+                  className="object-cover w-full h-auto"
                 />
               </motion.div>
 

@@ -4,7 +4,9 @@ import React from "react";
 
 const Newsletter = () => {
   return (
-    <section className="w-full flex justify-center px-4 md:px-8 py-12">
+    // Negative top margin + high z-index so newsletter visually overlaps
+    // the area between FAQSection and Footer without creating extra page space.
+    <section className="w-full flex justify-center pt-35 px-4 md:px-8 py-0 relative -mt-18 md:-mt-16 z-50">
       <div
         className="
           relative

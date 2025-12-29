@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { FiSearch, FiPhone, FiMenu, FiX } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
+import TopBar from './layout/TopBar'
 
 const OgNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,11 +16,6 @@ const OgNavbar = () => {
     { name: 'Contact Us', id: 'contact' },
   ];
 
-  /**
-   * Handles smooth scrolling + active state
-   * Works for div / a / button clicks
-   * Vercel + strict TS safe
-   */
   const handleScroll = (
     e: React.MouseEvent<HTMLElement>,
     id: string,
@@ -31,17 +27,32 @@ const OgNavbar = () => {
 
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Offset for sticky header height (approx 80px)
+      const headerOffset = 80; 
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
   return (
+     <>
+     <TopBar />
+      
     <motion.nav
-      initial={{ y: -100, opacity: 0 }}
+        
+     initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0, 0, 0.2, 1] }}
-      className="fixed top-0 w-full bg-white/90 backdrop-blur-md py-4 px-6 md:px-12 z-50 shadow-sm"
+      // CHANGE 1: Changed 'fixed' to 'sticky'. 
+      // This ensures it sits BELOW the TopBar initially, then sticks to top on scroll.
+      className="sticky top-0 w-full bg-white/90 backdrop-blur-md py-4 px-6 md:px-12 z-50 shadow-sm"
     >
+      
       <div className="flex justify-between items-center font-sans max-w-7xl mx-auto">
 
         {/* LOGO */}
@@ -140,6 +151,8 @@ const OgNavbar = () => {
         )}
       </AnimatePresence>
     </motion.nav>
+
+    </>
   );
 };
 

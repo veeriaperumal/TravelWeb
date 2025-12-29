@@ -54,7 +54,7 @@ const FAQSection = () => {
   };
 
   return (
-    <section className="relative w-full min-h-screen bg-white py-16 px-4 flex flex-col items-center justify-start overflow-hidden">
+    <section className="relative w-full bg-white py-12 px-4 flex flex-col items-center justify-start overflow-hidden">
       
       {/* BACKGROUND DECORATION: The yellow diagonal shape seen on the right */}
       <div className="absolute top-40 right-0 w-1/3 h-full bg-[#FCEEB5] -skew-x-12 translate-x-20 -z-10 rounded-tl-[100px]" />

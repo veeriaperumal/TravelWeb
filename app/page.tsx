@@ -10,11 +10,15 @@ import TripPlannerCTA from '../components/TripPlannerCTA';
 import FAQSection from '@/components/FAQSection';
 import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
+// import Header from '../components/layout/Header';
+// import TopBar from '@/components/layout/TopBar';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white overflow-x-hidden">
+    <main className="min-h-screen bg-white ">
       <div className="relative z-10">
+
+        
         
         {/* Navigation */}
         <OgNavbar />
